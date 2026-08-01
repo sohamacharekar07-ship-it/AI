@@ -1,3 +1,11 @@
+Laxmi Charitable Trust’s 
+Sheth L.U.J College of Arts & Sir M.V. College of Science andCommerce Department of Information Technology (B.Sc.I.T Semester V) 
+AI
+Practical – VII
+Roll No.: T001 	Name: Soham Acharekar
+Class: TYIT 	Batch: 01
+Date of Assignment: 1/8/26 	Date/Time of Submission:1/8/26 
+
 Machine Learning
 1. Using any small dataset (e.g., Iris or a CSV dataset), write a Python program to demonstrate the basic machine learning workflow.
 a. Load dataset using Pandas.
@@ -13,69 +21,69 @@ from sklearn.preprocessing iimport mport LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
-Load the Dataset
+●	Load the Dataset
 # 1. Load the Dataset
 df = pd.read_csv("iris - iris - iris - iris.csv")
 print("========== Dataset Loaded ==========\n")
-Display the Dataset
+●	Display the Dataset
 # 2. Display the Dataset
 print("First 5 Records:")
 print(df.head())
-
-Check Dataset Information
+ 
+●	Check Dataset Information
 # 3. Check Dataset Information
 print("\nDataset Information:")
 df.info()
-
-Display Dataset Shape
+ 
+●	Display Dataset Shape
 # 4. Display Dataset Shape
 print("\nDataset Shape:")
 print(df.shape)
-
-Display Column Names
+ 
+●	Display Column Names
 # 5. Display Column Names
 print("\nColumn Names:")
 print(df.columns)
-
-Display Summary Statistics
+ 
+●	Display Summary Statistics
 # 6. Display Summary Statistics
 print("\nSummary Statistics:")
 print(df.describe())
-
-Check Data Types
+ 
+●	Check Data Types
 # 7. Check Data Types
 print("\nData Types:")
 print(df.dtypes)
-
-Check Missing Values
+ 
+●	Check Missing Values
 # 8. Check Missing Values
 print("\nMissing Values:")
 print(df.isnull().sum())
-
-Handle Missing Values
+ 
+●	Handle Missing Values
 # 9. Handle Missing Values
 numeric_columns = df.select_dtypes(include=np.number).columns
 imputer = SimpleImputer(strategy="mean")
 df[numeric_columns] = imputer.fit_transform(df[numeric_columns])
 print("\nMissing Values After Handling:")
 print(df.isnull().sum())
-
-Remove Duplicate Records
+ 
+●	Remove Duplicate Records
 # 10. Remove Duplicate Records
 print("\nDuplicate Records Before Removing:")
 print(df.duplicated().sum())
 df = df.drop_duplicates()
 print("Duplicate Records After Removing:")
 print(df.duplicated().sum())
-
-Encode Categorical Data (Label Encoding / One-Hot Encoding)
+ 
+●	Encode Categorical Data (Label Encoding / One-Hot Encoding)
 # 11. Encode Categorical Data
 encoder = LabelEncoder()
 df["species"] = encoder.fit_transform(df["species"])
 print("\nEncoded Dataset:")
 print(df.head())
-
-Rename Columns
+ 
+●	Rename Columns
 # 12. Rename Columns
 df.rename(columns={
     "sepal_length":"Sepal_Length",
@@ -86,15 +94,15 @@ df.rename(columns={
 }, inplace=True)
 print("\nColumn Names After Rename:")
 print(df.columns)
-
-Drop Unnecessary Columns
+ 
+●	Drop Unnecessary Columns
 # 13. Drop Unnecessary Columns
 # Iris dataset has no unnecessary columns.
 # Example (if any column existed):
 # df.drop(columns=["ID"], inplace=True)
 print("\nNo unnecessary columns to drop.")
-
-Select Features (Feature Selection)
+ 
+●	Select Features (Feature Selection)
 # 14. Select Features
 features = [
     "Sepal_Length",
@@ -104,35 +112,35 @@ features = [
 ]
 print("\nSelected Features:")
 print(features)
-
-Create New Features (Feature Engineering)
+ 
+●	Create New Features (Feature Engineering)
 # 15. Create New Features
 df["Petal_Area"] = df["Petal_Length"] * df["Petal_Width"]
 print("\nNew Feature Created: Petal_Area")
 print(df.head())
-
-Convert Data Types
+ 
+●	Convert Data Types
 # 16. Convert Data Types
 df["Species"] = df["Species"].astype(int)
 print("\nData Types After Conversion:")
 print(df.dtypes)
-
-Normalize Data (Min-Max Scaling)
+ 
+●	Normalize Data (Min-Max Scaling)
 # 17. Normalize Data (Min-Max Scaling)
 minmax = MinMaxScaler()
 columns_to_scale = features + ["Petal_Area"]
 df[columns_to_scale] = minmax.fit_transform(df[columns_to_scale])
 print("\nNormalized Data:")
 print(df.head())
-
-Standardize Data (Standard Scaling)
+ 
+●	Standardize Data (Standard Scaling)
 # 18. Standardize Data (Standard Scaling)
 standard = StandardScaler()
 df[columns_to_scale] = standard.fit_transform(df[columns_to_scale])
 print("\nStandardized Data:")
 print(df.head())
-
-Split Features and Target Variable
+ 
+●	Split Features and Target Variable
 # 19. Split Features and Target Variable
 X = df[columns_to_scale]
 y = df["Species"]
@@ -140,10 +148,35 @@ print("\nFeatures (X):")
 print(X.head())
 print("\nTarget Variable (y):")
 print(y.head())
+ 
 
-
-
-
+c. Split dataset into training and testing sets.
+# 20. Split Dataset into Training and Testing Sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42
+)
+print("\nTraining Features Shape:", X_train.shape)
+print("Testing Features Shape:", X_test.shape)
+print("Training Target Shape:", y_train.shape)
+print("Testing Target Shape:", y_test.shape)
+ 
+d. Train a simple classifier.
+# 21. Train a Simple Classifier (KNN)
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors=3)
+classifier.fit(X_train, y_train)
+print("\nKNN Classifier Trained Successfully.")
+ 
+e. Display training and testing accuracy.
+# 22. Display Training and Testing Accuracy
+train_accuracy = classifier.score(X_train, y_train)
+test_accuracy = classifier.score(X_test, y_test)
+print("\nTraining Accuracy:", round(train_accuracy * 100, 2), "%")
+print("Testing Accuracy:", round(test_accuracy * 100, 2), "%")
+ 
 
 DATASET - PENGUINS
 import pandas as pd
@@ -152,47 +185,47 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
-Load the Dataset
+●	Load the Dataset
 # 1. Load the Dataset
 df = pd.read_csv("penguins.csv")
 print("========== Dataset Loaded ==========\n")
-
-Display the Dataset
+ 
+●	Display the Dataset
 # 2. Display the Dataset
 print("First 5 Records:")
 print(df.head())
-
-Check Dataset Information
+ 
+●	Check Dataset Information
 # 3. Check Dataset Information
 print("\nDataset Information:")
 df.info()
-
-Display Dataset Shape
+ 
+●	Display Dataset Shape
 # 4. Display Dataset Shape
 print("\nDataset Shape:")
 print(df.shape)
-
-Display Column Names
+ 
+●	Display Column Names
 # 5. Display Column Names
 print("\nColumn Names:")
 print(df.columns)
-
-Display Summary Statistics
+ 
+●	Display Summary Statistics
 # 6. Display Summary Statistics
 print("\nSummary Statistics:")
 print(df.describe())
-
-Check Data Types
+ 
+●	Check Data Types
 # 7. Check Data Types
 print("\nData Types:")
 print(df.dtypes)
-
-Check Missing Values
+ 
+●	Check Missing Values
 # 8. Check Missing Values
 print("\nMissing Values:")
 print(df.isnull().sum())
-
-Handle Missing Values
+ 
+●	Handle Missing Values
 # 9. Handle Missing Values
 numeric_columns = df.select_dtypes(include=np.number).columns
 imputer = SimpleImputer(strategy="mean")
@@ -202,16 +235,16 @@ for col in categorical_columns:
     df[col].fillna(df[col].mode()[0], inplace=True)
 print("\nMissing Values After Handling:")
 print(df.isnull().sum())
-
-Remove Duplicate Records
+ 
+●	Remove Duplicate Records
 # 10. Remove Duplicate Records
 print("\nDuplicate Records Before Removing:")
 print(df.duplicated().sum())
 df = df.drop_duplicates()
 print("Duplicate Records After Removing:")
 print(df.duplicated().sum())
-
-Encode Categorical Data (Label Encoding / One-Hot Encoding)
+ 
+●	Encode Categorical Data (Label Encoding / One-Hot Encoding)
 # 11. Encode Categorical Data
 encoder = LabelEncoder()
 df["species"] = encoder.fit_transform(df["species"])
@@ -219,8 +252,8 @@ df["island"] = encoder.fit_transform(df["island"])
 df["sex"] = encoder.fit_transform(df["sex"])
 print("\nEncoded Dataset:")
 print(df.head())
-
-Rename Columns
+ 
+●	Rename Columns
 # 12. Rename Columns
 df.rename(columns={
     "bill_length_mm":"Bill_Length",
@@ -233,15 +266,15 @@ df.rename(columns={
 }, inplace=True)
 print("\nColumn Names After Rename:")
 print(df.columns)
-
-Drop Unnecessary Columns
+ 
+●	Drop Unnecessary Columns
 # 13. Drop Unnecessary Columns
 if "year" in df.columns:
     df.drop(columns=["year"], inplace=True)
 print("\nRemaining Columns:")
 print(df.columns)
-
-Select Features (Feature Selection)
+ 
+●	Select Features (Feature Selection)
 # 14. Select Features
 features = [
     "Bill_Length",
@@ -251,37 +284,37 @@ features = [
 ]
 print("\nSelected Features:")
 print(features)
-
-Create New Features (Feature Engineering)
+ 
+●	Create New Features (Feature Engineering)
 # 15. Create New Feature
 df["Bill_Ratio"] = df["Bill_Length"] / df["Bill_Depth"]
 print("\nNew Feature Created: Bill_Ratio")
 print(df.head())
-
-Convert Data Types
+ 
+●	Convert Data Types
 # 16. Convert Data Types
 df["Species"] = df["Species"].astype(int)
 df["Island"] = df["Island"].astype(int)
 df["Sex"] = df["Sex"].astype(int)
 print("\nData Types After Conversion:")
 print(df.dtypes)
-
-Normalize Data (Min-Max Scaling)
+ 
+●	Normalize Data (Min-Max Scaling)
 # 17. Normalize Data
 columns_to_scale = features + ["Bill_Ratio"]
 minmax = MinMaxScaler()
 df[columns_to_scale] = minmax.fit_transform(df[columns_to_scale])
 print("\nNormalized Data:")
 print(df.head())
-
-Standardize Data (Standard Scaling)
+ 
+●	Standardize Data (Standard Scaling)
 # 18. Standardize Data
 standard = StandardScaler()
 df[columns_to_scale] = standard.fit_transform(df[columns_to_scale])
 print("\nStandardized Data:")
 print(df.head())
-
-Split Features and Target Variable
+ 
+●	Split Features and Target Variable
 # 19. Split Features and Target
 X = df[columns_to_scale]
 y = df["Species"]
@@ -289,4 +322,37 @@ print("\nFeatures (X):")
 print(X.head())
 print("\nTarget Variable (y):")
 print(y.head())
+ 
+c. Split dataset into training and testing sets.
+# 20. Split Dataset into Training and Testing Sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+print("\nTraining Features Shape:", X_train.shape)
+print("Testing Features Shape:", X_test.shape)
+print("Training Target Shape:", y_train.shape)
+print("Testing Target Shape:", y_test.shape)
+ 
+d. Train a simple classifier.
+# 21. Train a Simple Classifier (KNN)
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors=3)
+classifier.fit(X_train, y_train)
+print("\nKNN Classifier Trained Successfully.")
+ 
+e. Display training and testing accuracy.
+# 22. Display Training and Testing Accuracy
+train_accuracy = classifier.score(X_train, y_train)
+test_accuracy = classifier.score(X_test, y_test)
+print("\nTraining Accuracy:", round(train_accuracy * 100, 2), "%")
+print("Testing Accuracy:", round(test_accuracy * 100, 2), "%")
+ 
+Conclusion
+•	Iris Dataset is a simple and clean dataset, making it ideal for learning machine learning concepts and preprocessing techniques. 
+•	Penguins Dataset is larger and more realistic because it contains missing values and categorical variables, requiring additional preprocessing such as mode imputation and multiple label encodings. 
+•	Both datasets use the same machine learning workflow—preprocessing, feature engineering, scaling, train-test splitting, KNN classification, and accuracy evaluation—but the Penguins dataset requires more preprocessing and is slightly more complex than the Iris dataset. 
 
